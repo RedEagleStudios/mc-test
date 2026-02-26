@@ -1,0 +1,29 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "@redeaglestudios/mc-test",
+      "devDependencies": {
+        "@minecraft/server": "2.4.0",
+        "@minecraft/server-gametest": "1.0.0-beta.1.26.10-preview.25",
+        "typescript": "^5.9.3",
+      },
+      "peerDependencies": {
+        "@minecraft/server": ">=2.0.0",
+        "@minecraft/server-gametest": ">=1.0.0-beta",
+      },
+    },
+  },
+  "packages": {
+    "@minecraft/common": ["@minecraft/common@1.2.0", "", {}, "sha512-JdmEq4P3Z/FtoBzhLijFgMSVFnFRrUoLwY8DHHrgtFo0mfLTOLTB1RErYjLMsA6b7BGVNxkX/pfFRiH7QZ0XwQ=="],
+
+    "@minecraft/server": ["@minecraft/server@2.4.0", "", { "peerDependencies": { "@minecraft/common": "^1.2.0", "@minecraft/vanilla-data": ">=1.20.70" } }, "sha512-xd9dOWQ4RhPQBCt2aui9tp/GCnjvXpi6ZHVxaUr0SPDHfh/GkMRWnyf2Ud6D3pEThp/0giOEtHY1sx2HN9Qd+A=="],
+
+    "@minecraft/server-gametest": ["@minecraft/server-gametest@1.0.0-beta.1.26.10-preview.25", "", { "peerDependencies": { "@minecraft/common": "^1.0.0", "@minecraft/server": "^1.17.0 || ^2.0.0 || ^2.7.0-beta.1.26.10-preview.25" } }, "sha512-h6d9vaT0SygHf++w93+ZzoaRznRy/UlM9JWwGo6LbHtxqgtmcAnR6hQP6ZhyNkaj3sdCerYheA7Zo8gxvhMAjw=="],
+
+    "@minecraft/vanilla-data": ["@minecraft/vanilla-data@1.26.2", "", {}, "sha512-nxACCFgbcE9D5Z5vRnl/AtJljat7yC4vKzZ/t87iHqdersZlDhBzUnfBDH4d1F6Le5vgdSEUIJwUJxKR+Yc3+w=="],
+
+    "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
+  }
+}

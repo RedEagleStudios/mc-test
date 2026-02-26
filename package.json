@@ -1,0 +1,33 @@
+{
+  "name": "@redeaglestudios/mc-test",
+  "version": "0.1.0",
+  "description": "Game test utilities for Minecraft Bedrock Edition addons",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc"
+  },
+  "keywords": [
+    "minecraft",
+    "bedrock",
+    "gametest",
+    "testing"
+  ],
+  "author": "RedEagleStudios",
+  "license": "MIT",
+  "peerDependencies": {
+    "@minecraft/server": ">=2.0.0",
+    "@minecraft/server-gametest": ">=1.0.0-beta"
+  },
+  "devDependencies": {
+    "@minecraft/server": "2.4.0",
+    "@minecraft/server-gametest": "1.0.0-beta.1.26.10-preview.25",
+    "typescript": "^5.9.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src/"
+  ]
+}
