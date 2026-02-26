@@ -13,11 +13,6 @@ export type TestPlan = {
   test: (test: Test) => Promise<void>;
 };
 
-export type TestDefaultValue = {
-  player: {
-    normalMeleeDamage: 2
-  }
-}
 
 export const testSet: TestPlan[] = [];
 
