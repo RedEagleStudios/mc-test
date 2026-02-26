@@ -1,10 +1,10 @@
-name: Bump, Release & Publish
+name: Release NPM
 
 on:
   workflow_dispatch:
 
 jobs:
-  bump-release:
+  release-npm:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -21,25 +21,27 @@ jobs:
       - name: Get latest tag and bump patch
         id: bump
         run: |
-          latest=$(git tag --sort=-v:refname | head -n 1)
+          PREFIX="v"
+          latest=$(git tag --sort=-v:refname --list "${PREFIX}*" | head -n 1)
           if [ -z "$latest" ]; then
             new="0.1.0"
           else
-            version="${latest#v}"
+            version="${latest#${PREFIX}}"
             IFS='.' read -r major minor patch <<< "$version"
             patch=$((patch + 1))
             new="${major}.${minor}.${patch}"
           fi
-          echo "tag=${new}" >> "$GITHUB_OUTPUT"
-          echo "Bumping ${latest:-none} → ${new}"
+          echo "version=${new}" >> "$GITHUB_OUTPUT"
+          echo "tag=${PREFIX}${new}" >> "$GITHUB_OUTPUT"
+          echo "Bumping ${latest:-none} → ${PREFIX}${new}"
 
       - name: Bump version in package.json
         run: |
-          npm version "${{ steps.bump.outputs.tag }}" --no-git-tag-version --allow-same-version
+          npm version "${{ steps.bump.outputs.version }}" --no-git-tag-version --allow-same-version
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add package.json
-          git diff --cached --quiet && echo "No version change" || (git commit -m "Bump version to ${{ steps.bump.outputs.tag }}" && git push)
+          git diff --cached --quiet && echo "No version change" || (git commit -m "Bump version to ${{ steps.bump.outputs.version }}" && git push)
 
       - run: bun install --frozen-lockfile --ignore-scripts
 
@@ -51,7 +53,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${{ steps.bump.outputs.tag }}" *.tgz --generate-notes --title "v${{ steps.bump.outputs.tag }}"
+          gh release create "${{ steps.bump.outputs.tag }}" *.tgz --generate-notes --title "v${{ steps.bump.outputs.version }}"
 
       - name: Publish to npm
         run: bun publish --access public
