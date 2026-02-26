@@ -1,0 +1,9 @@
+{
+  "filters": [
+    {
+      "name": "deploy-test-bp",
+      "runWith": "nodejs",
+      "script": "./main.js"
+    }
+  ]
+}
