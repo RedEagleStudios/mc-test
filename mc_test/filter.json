@@ -1,7 +1,7 @@
 {
   "filters": [
     {
-      "name": "deploy-test-bp",
+      "name": "mc_test",
       "runWith": "nodejs",
       "script": "./main.js"
     }
