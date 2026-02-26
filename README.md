@@ -233,22 +233,10 @@ The package exports TypeScript types for better IDE support:
 import type { 
   ConfigOptions, 
   TestPlan, 
-  TestDefaultValue, 
   StructureName 
 } from "@redeaglestudios/mc-test";
 ```
 
-## Default Values
-
-Constants for common test scenarios:
-
-```ts
-export type TestDefaultValue = {
-  player: {
-    normalMeleeDamage: 2  // Default fist damage
-  }
-}
-```
 
 ## Example Project Structure
 
