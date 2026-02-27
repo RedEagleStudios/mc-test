@@ -1,6 +1,6 @@
 {
   "name": "@redeaglestudios/mc-test",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Game test utilities for Minecraft Bedrock Edition addons",
   "type": "module",
   "main": "src/index.ts",
