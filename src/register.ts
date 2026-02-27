@@ -56,6 +56,8 @@ export function registerTestPlan(...plans: TestPlan[]): void {
         } catch (e: any) {
           console.error(e)
           test.fail(e.message)
+        } finally {
+          test.killAllEntities();
         }
       }).tag(plan.group);
     for (const tag of plan.tag ?? []) {

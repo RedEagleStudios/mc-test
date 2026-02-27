@@ -4,7 +4,7 @@ export { registerTestPlan } from "./register.ts";
 export type { TestPlan } from "./register.ts";
 export { Structures, buildFlatStructure } from "./structures.ts";
 export type { StructureName } from "./structures.ts";
-export { isEntityDead } from "./util.ts";
+export { isEntityDead, fillInventory, measureBreakTicks, hasDroppedItem } from "./util.ts";
 
 import "./structures.ts";
 import "./commands.ts";
