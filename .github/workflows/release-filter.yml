@@ -2,6 +2,16 @@ name: Release Filter
 
 on:
   workflow_dispatch:
+    inputs:
+      bump:
+        description: Version bump type
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
   release-filter:
@@ -14,22 +24,27 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get latest tag and bump patch
+      - name: Get latest tag and bump version
         id: bump
         run: |
           PREFIX="mc_test-"
+          BUMP="${{ inputs.bump }}"
           latest=$(git tag --sort=-v:refname --list "${PREFIX}*" | head -n 1)
           if [ -z "$latest" ]; then
             new="0.1.0"
           else
             version="${latest#${PREFIX}}"
             IFS='.' read -r major minor patch <<< "$version"
-            patch=$((patch + 1))
+            case "$BUMP" in
+              major) major=$((major + 1)); minor=0; patch=0 ;;
+              minor) minor=$((minor + 1)); patch=0 ;;
+              patch) patch=$((patch + 1)) ;;
+            esac
             new="${major}.${minor}.${patch}"
           fi
           echo "version=${new}" >> "$GITHUB_OUTPUT"
           echo "tag=${PREFIX}${new}" >> "$GITHUB_OUTPUT"
-          echo "Bumping ${latest:-none} → ${PREFIX}${new}"
+          echo "Bumping ${latest:-none} → ${PREFIX}${new} (${BUMP})"
 
       - name: Bump version in mc_test/package.json
         run: |
